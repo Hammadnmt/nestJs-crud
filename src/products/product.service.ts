@@ -17,4 +17,18 @@ export class ProductService {
       console.log(error);
     }
   }
+  async getProducts(): Promise<any> {
+    try {
+      return this.productModel.find();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async deleteProduct(id): Promise<any> {
+    try {
+      return this.productModel.deleteOne({ id: id });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
