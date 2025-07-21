@@ -9,7 +9,7 @@ export class AuthController {
   @Post('login')
   login(@Request() req): any {
     try {
-      return req.user;
+      return this.authServic.login(req.user);
     } catch (error) {
       console.error('Login failed:', error);
       return null;
