@@ -1,6 +1,14 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
+import { JWTGuard } from 'src/common/guards/JwtGuard';
 
 @Controller('auth')
 export class AuthController {
@@ -14,5 +22,10 @@ export class AuthController {
       console.error('Login failed:', error);
       return null;
     }
+  }
+  @UseGuards(JWTGuard)
+  @Get('profile')
+  getProfile(@Request() req): any {
+    return req.user;
   }
 }
