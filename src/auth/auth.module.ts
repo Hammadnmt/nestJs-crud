@@ -5,14 +5,13 @@ import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategy/passport-local.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { JWT_CONSTANTS } from './contants/JWT_CNST';
 import { JWTStrategy } from './strategy/passport-jwt.strategy';
 @Module({
   imports: [
     UserModule,
     PassportModule,
     JwtModule.register({
-      secret: JWT_CONSTANTS.secert,
+      secret: process.env.JWT_SCRT,
     }),
   ],
   controllers: [AuthController],

@@ -11,11 +11,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ProductModule } from './products/product.module';
 import { SampleMiddleware } from './common/middlwares/sample-middleware';
 import { AuthModule } from './auth/auth.module';
-import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/NestJs-testingW'),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    MongooseModule.forRoot(process.env.DB_URL as string),
     ProductModule,
     AuthModule,
     UserModule,
